@@ -1,11 +1,18 @@
 import pandas as pd
 import os
+import sys
 
-folder_path = "input_excels"
+if len(sys.argv) < 2:
+    print("Uso: python main.py <ruta_carpeta>")
+    exit()
+
+folder_path = sys.argv[1]
 
 if not os.path.exists(folder_path):
-    print("❌ La carpeta 'input_excels' no existe")
+    print("❌ La carpeta no existe")
     exit()
+
+print("🔄 Procesando archivos...")
 
 all_data = []
 
@@ -13,8 +20,12 @@ for file in os.listdir(folder_path):
     if file.endswith(".xlsx"):
         file_path = os.path.join(folder_path, file)
         print(f"📄 Leyendo: {file}")
-        df = pd.read_excel(file_path)
-        all_data.append(df)
+        try:
+            df = pd.read_excel(file_path)
+            all_data.append(df)
+        except Exception as e:
+            print(f"Error leyendo {file}: {e}")
+
 
 if not all_data:
     print("❌ No se encontraron archivos Excel en la carpeta")
