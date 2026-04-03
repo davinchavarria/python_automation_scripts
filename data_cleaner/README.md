@@ -1,14 +1,18 @@
-# Data Cleaner
+# Data Cleaner Pro
 
-This script cleans Excel files by removing empty rows and duplicate data.
+A Python tool to clean Excel files automatically.
 
 ## Features
 - Removes empty rows
-- Removes duplicate entries
-- Outputs a clean Excel file
+- Removes duplicates
+- Cleans text spaces
+- Works with any Excel file
+- Custom output file support
 
 ## Usage
-1. Place your file as input.xlsx
-2. Run:
-   python main.py
-3. Get cleaned_output.xlsx
+
+python main.py input.xlsx
+python main.py input.xlsx output.xlsx
+
+## Output
+Cleaned Excel file ready for analysis.
