@@ -1,20 +1,20 @@
 import os
 import shutil
-import sys
+from tkinter import Tk, filedialog
 
-if len(sys.argv) < 2:
-    print("❌ Uso: python main.py <carpeta>")
-    exit()
+# Ocultar ventana principal
+root = Tk()
+root.withdraw()
 
-folder_path = sys.argv[1]
+# Seleccionar carpeta
+folder_path = filedialog.askdirectory(title="Selecciona una carpeta")
 
-if not os.path.exists(folder_path):
-    print("❌ La carpeta no existe")
+if not folder_path:
+    print("❌ No se seleccionó carpeta")
     exit()
 
 print("📂 Organizando archivos...")
 
-# Tipos de archivos
 file_types = {
     "imagenes": [".jpg", ".png", ".jpeg"],
     "pdf": [".pdf"],
@@ -35,7 +35,6 @@ for file in os.listdir(folder_path):
                 os.makedirs(target_folder, exist_ok=True)
 
                 shutil.move(file_path, os.path.join(target_folder, file))
-                print(f"📁 {file} → {folder_name}")
                 moved = True
                 break
 
@@ -43,6 +42,5 @@ for file in os.listdir(folder_path):
             target_folder = os.path.join(folder_path, "otros")
             os.makedirs(target_folder, exist_ok=True)
             shutil.move(file_path, os.path.join(target_folder, file))
-            print(f"📁 {file} → otros")
 
 print("✅ Organización completa")
